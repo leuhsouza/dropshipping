@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_05_103621) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_05_112048) do
+  create_table "portfolio_products", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "seller_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_portfolio_products_on_product_id"
+    t.index ["seller_id"], name: "index_portfolio_products_on_seller_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "supllier_id", null: false
+    t.decimal "prince"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supllier_id"], name: "index_products_on_supllier_id"
+  end
+
+  create_table "sellers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -18,4 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_103621) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "portfolio_products", "products"
+  add_foreign_key "portfolio_products", "sellers"
+  add_foreign_key "products", "suplliers"
 end
