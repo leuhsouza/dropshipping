@@ -16,7 +16,7 @@ class SellersController < ApplicationController
   end
 
   def create
-    @seller = Seller.new(seller_params)
+    @seller = Seller.new(sellers_params)
     if @seller.save
       redirect_to @seller, notice: 'Seller was successfully created'
     else
@@ -25,7 +25,7 @@ class SellersController < ApplicationController
   end
 
   def update
-    if @seller.update(seller_params)
+    if @seller.update(sellers_params)
       redirect_to @seller, notice: 'Seller was successfully updated.'
     else
       render :edit
