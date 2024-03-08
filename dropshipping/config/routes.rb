@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  resources :suppliers
   resources :products
   resources :sellers
   resources :portfolio_products, only: [:new, :create]
-
-
-
-
-
+  resources :suppliers, except: [:edit, :update] do
+    member do
+      get :edit
+      patch :update
+    end
+  end
 
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
